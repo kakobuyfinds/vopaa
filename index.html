@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#f7f2ea">
+  <title>LoveGoBuy spreadsheet | Liens produits, tailles et photos QC</title>
+  <meta name="description" content="Un guide LoveGoBuy spreadsheet en français pour vérifier les liens produits, comparer les tailles et les photos QC, puis estimer les frais de livraison.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="LoveGoBuy spreadsheet | Liens produits, tailles et photos QC">
+  <meta property="og:description" content="Repérez un article, vérifiez sa fiche et comparez le coût total avec un carnet d’achat en français.">
+  <link rel="icon" href="https://www.cafans.com/favicon.ico" type="image/x-icon">
+  <!-- Recherche éditoriale : Google a renvoyé une page intermédiaire. Le classement
+       de sa première page n’a pas pu être vérifié. Dix domaines ont servi à relever
+       les intentions de recherche à partir des résultats web accessibles :
+       lovegobuy.io (catégories, photos) ; lovegobuy.cc (liens, Weidian, guide) ;
+       lovegobuysheet.org (recherche par lien, QC) ; lovegobuy.net (tailles, matières) ;
+       sheetslovegobuy.com (mesures, variantes) ; lovego-buy.courses (tableau de suivi) ;
+       lovegobuy.org (présélection, coût) ; rep.tools (liens des places de marché) ;
+       buylovego.homes (organisation des trouvailles) ; lovego.org (QC, retours, colis).
+       Requêtes secondaires : guide d’achat LoveGoBuy, liens produits LoveGoBuy,
+       photos QC LoveGoBuy, frais de livraison LoveGoBuy. -->
+  <style>
+    :root{color-scheme:light;--paper:#f7f2ea;--ink:#29231e;--soft:#594c43;--line:#cbbbae;--rust:#872d1c;--white:#fffdf9}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,sans-serif}
+    h1,h2,h3,p,figure{margin:0}
+    h1,h2,h3{font-family:Georgia,serif;line-height:1.08;font-weight:600}
+    h1{font-size:clamp(2.75rem,7vw,6rem);letter-spacing:-.05em;overflow-wrap:anywhere}
+    h1 span{display:block}
+    h2{font-size:clamp(2rem,4vw,3.15rem);letter-spacing:-.035em}
+    h3{font-size:clamp(1.4rem,2.5vw,1.9rem)}
+    a{color:inherit}
+    a:focus-visible,summary:focus-visible{outline:3px solid #075c81;outline-offset:3px}
+    img{display:block;width:100%;height:auto}
+    .wrap{width:min(70rem,calc(100% - 2rem));margin-inline:auto}
+    .bar{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding-block:.85rem;border-bottom:1px solid var(--line)}
+    .brand{font-size:1.25rem;font-weight:850;text-decoration:none}
+    .eyebrow{color:var(--rust);font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .bar .eyebrow{text-align:right}
+    .catalog{padding-block:.75rem 1.25rem}
+    .catalog ul{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.25rem .75rem;list-style:none;padding:0;margin:.25rem 0 0}
+    .catalog a{display:flex;align-items:center;gap:.45rem;min-height:44px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:700;font-size:.88rem;line-height:1.25}
+    .catalog a:hover{color:var(--rust);border-color:var(--rust)}
+    .catalog span{color:var(--rust);font-size:.72rem;font-variant-numeric:tabular-nums}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(1rem,5vw,4rem);padding:clamp(1.25rem,4vw,3rem);background:#efdfd4;border-top:4px solid var(--rust)}
+    .hero h1{margin:.55rem 0 1rem}
+    .hero .lead{max-width:45ch}
+    .hero img{aspect-ratio:4/3;object-fit:contain;background:#e7cab9}
+    figcaption{font-size:.8rem;line-height:1.35;color:var(--soft);padding:.5rem .6rem}
+    .hero figcaption{padding-inline:0}
+    .cta{display:inline-flex;align-items:center;min-height:44px;margin-top:1rem;padding:.55rem .9rem;background:var(--rust);color:#fff;font-weight:750;text-decoration:none}
+    .cta:hover{background:#612113}
+    .section{margin-block:clamp(2.5rem,6vw,4.75rem)}
+    .section h2{margin-bottom:.7rem}
+    .intro{max-width:67ch;color:var(--soft)}
+    .notes{margin-top:1.15rem;border-top:1px solid var(--line)}
+    .notes article{display:grid;grid-template-columns:4rem minmax(0,1fr);gap:.65rem;padding:1.05rem 0;border-bottom:1px solid var(--line)}
+    .notes h3{margin-bottom:.45rem}
+    .notes p{max-width:76ch}
+    .notes p+p{margin-top:.55rem}
+    .folio{font:1.7rem Georgia,serif;color:var(--rust)}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin-top:1rem}
+    .grid figure{background:var(--white);border:1px solid var(--line)}
+    .grid img{aspect-ratio:1;object-fit:contain;background:#fff}
+    .sheet{padding:clamp(1rem,3vw,2rem);background:var(--white);border:1px solid var(--line)}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.25rem;margin:1rem 0 0}
+    .fields div{border-top:1px solid var(--line);padding-top:.55rem}
+    dt{font-weight:780}
+    dd{margin:0;color:var(--soft)}
+    .faq{max-width:54rem}
+    details{border-bottom:1px solid var(--line)}
+    summary{padding:.7rem 0;cursor:pointer;font-weight:750}
+    details p{max-width:66ch;margin:0 0 .85rem;color:var(--soft)}
+    footer{padding:1.25rem 0;background:#2b241f;color:#f7f2ea}
+    footer p{margin-top:.35rem}
+    @media(max-width:50rem){.catalog ul{grid-template-columns:repeat(3,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:37rem){.hero,.fields{grid-template-columns:1fr}.catalog ul{grid-template-columns:repeat(2,minmax(0,1fr))}.notes article{grid-template-columns:2rem minmax(0,1fr)}}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#guide",
+        "name": "LoveGoBuy spreadsheet | Liens produits, tailles et photos QC",
+        "description": "Un guide LoveGoBuy spreadsheet en français pour vérifier les liens produits, comparer les tailles et les photos QC, puis estimer les frais de livraison.",
+        "inLanguage": "fr",
+        "about": {"@type": "Thing", "name": "LoveGoBuy spreadsheet"},
+        "hasPart": {"@id": "#faq"}
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "name": "Questions fréquentes",
+        "inLanguage": "fr",
+        "mainEntity": [
+          {"@type":"Question","name":"Qu’est-ce qu’un LoveGoBuy spreadsheet ?","acceptedAnswer":{"@type":"Answer","text":"C’est un tableau de repérage qui rassemble des liens produits, des variantes et des notes de comparaison. Cette page fournit une méthode et des rubriques pour créer votre propre tableau."}},
+          {"@type":"Question","name":"Où mènent les liens des catégories ?","acceptedAnswer":{"@type":"Answer","text":"Ils ouvrent les catégories du catalogue cafans.com. Les photos de marques de ce guide servent de références visuelles."}},
+          {"@type":"Question","name":"Que faire si un lien Weidian ou Taobao ne fonctionne plus ?","acceptedAnswer":{"@type":"Answer","text":"Recherchez la référence du modèle et le nom du vendeur. Avant de remplacer le lien, vérifiez que la nouvelle fiche correspond au coloris et à la taille recherchés."}},
+          {"@type":"Question","name":"Les photos QC suffisent-elles à authentifier un produit ?","acceptedAnswer":{"@type":"Answer","text":"Non. Elles servent surtout à examiner l’état apparent, les détails visibles et la variante reçue. Pour une vérification d’authenticité, cherchez une preuve d’origine ou une expertise spécialisée."}},
+          {"@type":"Question","name":"Comment comparer la livraison vers la France ou la Belgique ?","acceptedAnswer":{"@type":"Answer","text":"Saisissez le pays et le code postal dans le calculateur de votre prestataire. Comparez les devis avec le même poids et les mêmes dimensions, puis vérifiez les frais inclus."}}
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/vopaa/">
+</head>
+<body>
+  <header class="wrap bar">
+    <a class="brand" href="https://www.cafans.com">www.cafans.com</a>
+    <p class="eyebrow">Carnet d’achat en français</p>
+  </header>
+  <main class="wrap" id="guide">
+    <nav class="catalog" aria-label="Catégories du catalogue Cafans">
+      <p class="eyebrow">Choisir une catégorie</p>
+      <ul>
+        <li><a href="https://cafans.com/category-911-Shoes.html"><span aria-hidden="true">01</span> Chaussures</a></li>
+        <li><a href="https://cafans.com/category-912-Hoodies%2FSweaters.html"><span aria-hidden="true">02</span> Sweats et pulls</a></li>
+        <li><a href="https://cafans.com/category-913-T-Shirts.html"><span aria-hidden="true">03</span> T-shirts</a></li>
+        <li><a href="https://cafans.com/category-914-Jackets.html"><span aria-hidden="true">04</span> Vestes</a></li>
+        <li><a href="https://cafans.com/category-915-Pants%2FShorts.html"><span aria-hidden="true">05</span> Pantalons et shorts</a></li>
+        <li><a href="https://cafans.com/category-916-Headwear.html"><span aria-hidden="true">06</span> Casquettes et bonnets</a></li>
+        <li><a href="https://cafans.com/category-917-Sets.html"><span aria-hidden="true">07</span> Ensembles</a></li>
+        <li><a href="https://cafans.com/category-918-underwear%2Funderpants.html"><span aria-hidden="true">08</span> Sous-vêtements</a></li>
+        <li><a href="https://cafans.com/category-919-Jersey.html"><span aria-hidden="true">09</span> Maillots</a></li>
+        <li><a href="https://cafans.com/category-920-Accessories.html"><span aria-hidden="true">10</span> Accessoires</a></li>
+      </ul>
+    </nav>
+    <section class="hero" aria-labelledby="titre">
+      <div>
+        <p class="eyebrow">De la première fiche au choix final</p>
+        <h1 id="titre"><span>LoveGoBuy</span> spreadsheet</h1>
+        <p class="lead">Un LoveGoBuy spreadsheet sert à garder au même endroit les liens des articles qui vous intéressent, les mesures relevées et les points à vérifier. Ce guide d’achat LoveGoBuy vous aide à constituer ce tableau à partir des fiches que vous consultez.</p>
+        <a class="cta" href="https://www.cafans.com">Parcourir le catalogue Cafans</a>
+      </div>
+      <figure>
+        <img src="https://image.goat.com/750/attachments/product_template_pictures/images/111/956/871/original/1570600_00.png.png" width="750" height="750" loading="eager" fetchpriority="high" alt="Nike Air Max 90 blanche et grise, de profil, avec Swoosh rouge">
+        <figcaption>Référence visuelle · Nike Air Max 90 Summit White University Red</figcaption>
+      </figure>
+    </section>
+    <section class="section" aria-labelledby="articles">
+      <h2 id="articles">Trois vérifications avant de choisir</h2>
+      <p class="intro">Gardez deux fiches comparables sous la main. Notez les informations manquantes au même endroit que les mesures confirmées.</p>
+      <div class="notes">
+        <article>
+          <span class="folio" aria-hidden="true">01</span>
+          <div>
+            <h3>Vérifier les liens produits LoveGoBuy</h3>
+            <p>Pour retrouver une fiche Taobao, Weidian ou 1688, notez le lien source, le nom du vendeur et la référence du modèle. Si vous partez d’une photo, ajoutez à la recherche un détail distinctif comme la couleur de la semelle ou la forme d’une poche. Sur la fiche, sélectionnez le coloris et la taille, puis contrôlez la disponibilité de cette variante.</p>
+            <p>Si deux annonces utilisent les mêmes photos, comparez la composition du tissu, les dimensions et les conditions de retour du vendeur. Conservez la date de vérification pour savoir quelles fiches rouvrir avant une commande.</p>
+          </div>
+        </article>
+        <article>
+          <span class="folio" aria-hidden="true">02</span>
+          <div>
+            <h3>Lire le tableau des tailles et les photos QC LoveGoBuy</h3>
+            <p>Pour un sweat, mesurez à plat la largeur de poitrine et la longueur du dos d’un vêtement qui vous va. Pour une veste, ajoutez la longueur de manche. Pour des baskets, vérifiez si le guide des pointures indique la longueur du pied ou celle de la semelle intérieure. Pour une casquette, relevez le tour de tête et la plage de réglage.</p>
+            <p>Une photo QC est une photo de contrôle qualité. Si le service propose des vues supplémentaires, demandez une photo de l’étiquette de taille, un gros plan de la fermeture ou une photo avec un mètre. Pour un sac, contrôlez aussi l’ouverture et l’intérieur. Pour un bracelet rigide, comparez le diamètre intérieur et le type de fermoir.</p>
+          </div>
+        </article>
+        <article>
+          <span class="folio" aria-hidden="true">03</span>
+          <div>
+            <h3>Estimer les frais de livraison LoveGoBuy</h3>
+            <p>Inscrivez séparément le prix du produit, la livraison intérieure en Chine, les éventuels frais de service et le tarif d’expédition internationale. Pour comparer deux paniers en euros, utilisez la même date de conversion du yuan. Relevez le poids réel et les dimensions du carton, puis regardez si le transporteur facture selon le poids volumétrique.</p>
+            <p>Pour un envoi vers la France, la Belgique, la Suisse ou le Québec, entrez le code postal de destination dans le calculateur du prestataire. Vérifiez les options de suivi du colis, les conditions de retour et les frais que le devis inclut. Comparez les offres à destination, contenu et dimensions identiques.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="details-mode">
+      <h2 id="details-mode">Quatre détails à regarder sur une photo</h2>
+      <p class="intro">Ces références de style illustrent quatre points à contrôler sur la fiche que vous examinez : les bords d’un vêtement, les anses d’un sac, la forme d’une visière et la fermeture d’un bracelet.</p>
+      <div class="grid">
+        <figure>
+          <img src="https://assets.christiandior.com/is/image/diorprod/613M403A2026C585_E01?%24default_GHC%24=&amp;crop=425%2C150%2C1151%2C1598&amp;hei=480&amp;wid=440" width="440" height="480" loading="lazy" decoding="async" alt="Blouson Dior Oblique bleu zippé, vu de face, avec col et poignets côtelés">
+          <figcaption>Dior Oblique · Col et poignets</figcaption>
+        </figure>
+        <figure>
+          <img src="https://uk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm-tote-bag--M46987_PM1_Back%20view.png?hei=480&amp;wid=480&amp;fmt=webp" width="480" height="480" loading="lazy" decoding="async" alt="Cabas Louis Vuitton Neverfull MM en toile Monogram brune, avec anses claires et pochette assortie">
+          <figcaption>Louis Vuitton Neverfull MM · Anses et pochette</figcaption>
+        </figure>
+        <figure>
+          <img src="https://brandol.jp/upload/save_image/gu-200035-kqwbg-9791-l_1.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Casquette Gucci Original GG en toile beige à motif brun, vue de face">
+          <figcaption>Gucci Original GG · Forme de la visière</figcaption>
+        </figure>
+        <figure>
+          <img src="https://www.oliverjewellery.ca/cdn/shop/files/Hermes-Palladium-Plated-Orange-Enamel-Clic-H-Bracelet-w-Box_f80dab0b.jpg?v=1744110722&amp;width=440" width="440" height="440" loading="lazy" decoding="async" alt="Bracelet Hermès Clic H en émail orange avec fermoir argenté en H">
+          <figcaption>Hermès Clic H · Fermoir et émail</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="section sheet" aria-labelledby="fiche">
+      <h2 id="fiche">Les champs à copier dans votre tableau</h2>
+      <p class="intro">Exemple pour comparer deux vestes : si une fiche indique une largeur à plat et l’autre un tour de poitrine, notez les deux méthodes de mesure avant de comparer les chiffres.</p>
+      <dl class="fields">
+        <div><dt>Produit et vendeur</dt><dd>Lien d’origine, référence, nom de la boutique, date de vérification.</dd></div>
+        <div><dt>Variante et mesures</dt><dd>Coloris, taille choisie, mesure en centimètres, méthode de mesure.</dd></div>
+        <div><dt>Contrôle et décision</dt><dd>Photo de détail disponible, question à poser, prochaine étape.</dd></div>
+        <div><dt>Coût total estimé</dt><dd>Devise, prix affiché, frais séparés et destination du devis.</dd></div>
+      </dl>
+    </section>
+    <section class="section faq" id="faq" aria-labelledby="questions">
+      <h2 id="questions">Questions fréquentes</h2>
+      <details open>
+        <summary>Qu’est-ce qu’un LoveGoBuy spreadsheet ?</summary>
+        <p>C’est un tableau de repérage qui rassemble des liens produits, des variantes et des notes de comparaison. Cette page fournit une méthode et des rubriques pour créer votre propre tableau.</p>
+      </details>
+      <details>
+        <summary>Où mènent les liens des catégories ?</summary>
+        <p>Ils ouvrent les catégories du catalogue cafans.com. Les photos de marques de ce guide servent de références visuelles.</p>
+      </details>
+      <details>
+        <summary>Que faire si un lien Weidian ou Taobao ne fonctionne plus ?</summary>
+        <p>Recherchez la référence du modèle et le nom du vendeur. Avant de remplacer le lien, vérifiez que la nouvelle fiche correspond au coloris et à la taille recherchés.</p>
+      </details>
+      <details>
+        <summary>Les photos QC suffisent-elles à authentifier un produit ?</summary>
+        <p>Non. Elles servent surtout à examiner l’état apparent, les détails visibles et la variante reçue. Pour une vérification d’authenticité, cherchez une preuve d’origine ou une expertise spécialisée.</p>
+      </details>
+      <details>
+        <summary>Comment comparer la livraison vers la France ou la Belgique ?</summary>
+        <p>Saisissez le pays et le code postal dans le calculateur de votre prestataire. Comparez les devis avec le même poids et les mêmes dimensions, puis vérifiez les frais inclus.</p>
+      </details>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <a class="brand" href="https://www.cafans.com">www.cafans.com</a>
+      <p>Guide indépendant de repérage et de comparaison. Les visuels illustrent les modèles cités.</p>
+    </div>
+  </footer>
+</body>
+</html>
